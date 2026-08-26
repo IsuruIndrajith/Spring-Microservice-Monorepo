@@ -8,6 +8,7 @@ import com.example.order.service.repository.OrderRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,6 +21,7 @@ import static java.util.stream.Collectors.toList;
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final WebClient webClient;
 
     public void placeOrder(OrderRequest orderRequest){
         Order order = new Order();
@@ -31,6 +33,21 @@ public class OrderService {
                 .toList();
 
         order.setOrderLineItemList(orderLineItems);
+
+//        call Inventory service and plcae the order if product is in stock
+
+        Boolean results = webClient.get()
+                .uri("http://localhost:8082/api/inventory")
+                .retrieve()
+                .bodyToMono(Boolean.class)
+                .block();
+//        for synchronous requests
+
+        if(results){
+            orderRepository.save(order);
+        } else {
+            throw new IllegalArgumentException("Product is not in stock, please try again later");
+        }
 
         orderRepository.save(order);
     }
