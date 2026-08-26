@@ -4,6 +4,7 @@ package spring_microservice.inventory_service.controller;
 import org.springframework.http.HttpStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import spring_microservice.inventory_service.dto.InventoryResponse;
 import spring_microservice.inventory_service.service.InventoryService;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class InventoryController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public boolean isInStock(@RequestParam List<String> skuCode){
+    public List<InventoryResponse> isInStock(@RequestParam List<String> skuCode){
         return inventoryService.isInStock(skuCode);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.order.service.service;
 
+import com.example.order.service.dto.InventoryResponse;
 import com.example.order.service.dto.OrderLineItemsDto;
 import com.example.order.service.dto.OrderRequest;
 import com.example.order.service.model.Order;
@@ -7,13 +8,15 @@ import com.example.order.service.model.OrderLineItems;
 import com.example.order.service.repository.OrderRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +25,8 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final WebClient webClient;
+    @Value("${inventory.service.url}")
+    private String inventoryServiceUrl;
 
     public void placeOrder(OrderRequest orderRequest){
         Order order = new Order();
@@ -34,22 +39,30 @@ public class OrderService {
 
         order.setOrderLineItemList(orderLineItems);
 
+        List<String> skuCodes = order.getOrderLineItemList().stream()
+                .map(OrderLineItems::getSkuCode)
+                .toList();
+
 //        call Inventory service and plcae the order if product is in stock
 
-        Boolean results = webClient.get()
-                .uri("http://localhost:8082/api/inventory")
+        InventoryResponse[] inventoryResponsesArray = webClient.get()
+                .uri(inventoryServiceUrl + "/api/inventory",
+                        uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                 .retrieve()
-                .bodyToMono(Boolean.class)
+                .bodyToMono(InventoryResponse[].class)
                 .block();
 //        for synchronous requests
 
-        if(results){
+        Map<String, Boolean> inventoryBySkuCode = Arrays.stream(inventoryResponsesArray)
+                .collect(Collectors.toMap(InventoryResponse::getSkuCode, InventoryResponse::isInStock));
+        boolean allProductsInStock = skuCodes.stream()
+                .allMatch(skuCode -> Boolean.TRUE.equals(inventoryBySkuCode.get(skuCode)));
+
+        if(allProductsInStock){
             orderRepository.save(order);
         } else {
             throw new IllegalArgumentException("Product is not in stock, please try again later");
         }
-
-        orderRepository.save(order);
     }
 
     private OrderLineItems mapToDto(OrderLineItemsDto orderLineItemsDto){
