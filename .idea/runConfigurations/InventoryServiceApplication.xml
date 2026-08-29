@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="InventoryServiceApplication" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" singleton="false">
+    <option name="MAIN_CLASS_NAME" value="spring_microservice.inventory_service.InventoryServiceApplication" />
+    <module name="inventory-service" />
+    <selectedOptions>
+      <option name="environmentVariables" visible="false" />
+    </selectedOptions>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

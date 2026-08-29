@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
     @Value("${inventory.service.url}")
     private String inventoryServiceUrl;
 
@@ -45,7 +45,7 @@ public class OrderService {
 
 //        call Inventory service and plcae the order if product is in stock
 
-        InventoryResponse[] inventoryResponsesArray = webClient.get()
+        InventoryResponse[] inventoryResponsesArray = webClientBuilder.build().get()
                 .uri(inventoryServiceUrl + "/api/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                 .retrieve()
