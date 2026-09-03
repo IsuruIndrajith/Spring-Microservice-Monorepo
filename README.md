@@ -216,21 +216,21 @@ All microservices automatically register with the **Eureka Discovery Server** on
 
 **Screenshot — Eureka Discovery Server Dashboard:**
 
-> 📸 _[Screenshot: Eureka discovery server]_
+> <img width="1919" height="1024" alt="Eureka discovery server" src="https://github.com/user-attachments/assets/e798d748-fea9-48c9-bed7-641af6b277cb" />
 
 **Screenshot — Inventory Service registered in Eureka:**
 
-> 📸 _[Screenshot: inventory service mapped to eureka discovery server]_
+> <img width="1814" height="455" alt="inventory service mapped to eureka discovery server" src="https://github.com/user-attachments/assets/cb1df43c-2430-4ea3-912c-7904b73010c0" />
 
 **Screenshot — All service instances registered:**
 
-> 📸 _[Screenshot: service instances running on eureka server]_
+> <img width="1919" height="1015" alt="service instances running on eureka server" src="https://github.com/user-attachments/assets/d9ee72aa-a02a-4d26-99f3-a8b0d5817077" />
 
 **Screenshot — Multiple Inventory instances on random ports:**
 
-> 📸 _[Screenshot: extra inventory instances run on random ports]_
+> <img width="1864" height="596" alt="extra inventory instances run on random ports" src="https://github.com/user-attachments/assets/d69b4bf5-e0be-4333-a010-cf036fb11ec5" />
 
-> 📸 _[Screenshot: with multiple instances of a services]_
+> <img width="1883" height="914" alt="with multiple instances of a services" src="https://github.com/user-attachments/assets/18984ed3-825b-45ba-b051-3846a26a5b21" />
 
 ---
 
@@ -267,27 +267,27 @@ spring.cloud.gateway.routes[2].filters[0]=SetPath=/
 
 **Screenshot — Eureka dashboard with API Gateway registered:**
 
-> 📸 _[Screenshot: eureka discovery server with the API gateway]_
+> <img width="1912" height="959" alt="eureka discovery server with the API gate way" src="https://github.com/user-attachments/assets/934d32a0-e941-4683-a84a-d733b1207f3a" />
 
 **Screenshot — Accessing product service through the API Gateway port (8090) instead of 8082:**
 
-> 📸 _[Screenshot: accessed the API gateway port instead of the product service port]_
+> <img width="1265" height="864" alt="accessed the API gate way port instead of the product service port" src="https://github.com/user-attachments/assets/52835252-10d5-41f5-9c20-1c9baf23bc41" />
 
 **Screenshot — API Gateway route mapped to product service:**
 
-> 📸 _[Screenshot: API gateway route mapped to the product service]_
+> <img width="1769" height="469" alt="API gateway route mapped to the product service" src="https://github.com/user-attachments/assets/7d7fefb7-d5fd-4e15-a553-4139861cd487" />
 
 **Screenshot — API Gateway overview:**
 
-> 📸 _[Screenshot: api gateway]_
+> <img width="943" height="704" alt="api gate way" src="https://github.com/user-attachments/assets/1f60705d-06b7-4222-b647-fe1869cca715" />
 
 **Screenshot — Accessing Eureka Server UI through the API Gateway:**
 
-> 📸 _[Screenshot: Accessing the eureka server through the API gateway]_
+> <img width="1919" height="971" alt="Accessing the eureka server through the API gate way " src="https://github.com/user-attachments/assets/eed01859-58b7-4121-9a70-e400b6491d17" />
 
 **Screenshot — Eureka static resources served via API Gateway:**
 
-> 📸 _[Screenshot: eureka server accessed through the API gateway with static resources]_
+> <img width="1919" height="958" alt="eureka server accessed through the  API gate way with static resources" src="https://github.com/user-attachments/assets/8d411384-e1d1-45e2-bd44-ba293053d104" />
 
 ---
 
@@ -314,7 +314,7 @@ static class KeycloakRealmRoleConverter implements Converter<Jwt, Collection<Gra
 
 **Screenshot — Keycloak Client Configuration:**
 
-> 📸 _[Screenshot: keycloak client]_
+> <img width="1301" height="620" alt="keycloak client" src="https://github.com/user-attachments/assets/c1651e1a-da64-41a6-930c-51260dd0c244" />
 
 ---
 
@@ -337,27 +337,27 @@ The **Order Service** protects itself against failures in the **Inventory Servic
 
 **Screenshot — Resilience4J properties configured for Order Service:**
 
-> 📸 _[Screenshot: resilience4j properties for the order service]_
+> <img width="1107" height="657" alt="resilience4j properties for the order service" src="https://github.com/user-attachments/assets/b9951c87-1257-4834-bf53-344091cc8238" />
 
 **Screenshot — Fallback response when circuit is open:**
 
-> 📸 _[Screenshot: fallback error message from the resilience4J]_
+> <img width="1303" height="846" alt="fallback error message from the resilience4J" src="https://github.com/user-attachments/assets/512926bd-34f9-4135-a6a8-bb678b5e59e1" />
 
-**Screenshot — Circuit Breaker in CLOSED/OPEN state:**
+**Screenshot — Circuit Breaker in CLOSED state:**
 
-> 📸 _[Screenshot: circuit breaker status]_
+> <img width="780" height="532" alt="circuit breaker status" src="https://github.com/user-attachments/assets/7f6ceb93-01a0-42df-b7f5-e5f8151f81ca" />
 
 **Screenshot — Circuit Breaker in HALF-OPEN state (probing recovery):**
 
-> 📸 _[Screenshot: half open circuit breaker status]_
+> <img width="592" height="487" alt="half open circuit breaker status" src="https://github.com/user-attachments/assets/36e605b4-61f2-44dd-8f72-6ba02b9f3ac8" />
 
 **Screenshot — Timeout exception from Time Limiter:**
 
-> 📸 _[Screenshot: time out exception from the timeout handling from resilience4j for the retry events]_
+> <img width="1815" height="917" alt="time out exception from the timeout handling from resilience4j for the retry events" src="https://github.com/user-attachments/assets/364d95a0-548d-4ff2-b8e0-5e9485a5a31a" />
 
 **Screenshot — Retry events logged by Resilience4J:**
 
-> 📸 _[Screenshot: retry events done by resilience 4j]_
+> <img width="1091" height="618" alt="retry events done by resilince 4j" src="https://github.com/user-attachments/assets/ccc7e37d-533d-4252-99b6-f5c73d1cddb4" />
 
 ---
 
@@ -394,11 +394,14 @@ Order Service                    Kafka Broker                   Notification Ser
 
 **Screenshot — Notification Service receiving Kafka events (Terminal):**
 
-> 📸 _[Screenshot: Running notification service - event driven architecture from kafka]_
+> 📸 _[Running notification service - event driven architecture from kafka]_
+> <img width="1277" height="705" alt="Running notification service - event driven architecture from kafka" src="https://github.com/user-attachments/assets/bb67e20c-f61d-4571-8c2e-834012783844" />
 
-> 📸 _[Screenshot: notification service running terminal screenshot 2]_
+> 📸 _[Notification service running terminal screenshot]_
+> <img width="1277" height="705" alt="notification service running terminal screenshot 2" src="https://github.com/user-attachments/assets/f6e24fc6-a8d1-48d8-8990-163b8e136620" />
 
-> 📸 _[Screenshot: notification service running terminal screenshot]_
+> <img width="1277" height="705" alt="notification service running terminal screenshot" src="https://github.com/user-attachments/assets/7affdfef-b4bc-4c18-930b-ca0ac4a01ab5" />
+
 
 ---
 
@@ -453,7 +456,7 @@ All service images are built and pushed to **Docker Hub** using the **Google Jib
 
 **Screenshot — Service images on Docker Hub:**
 
-> 📸 _[Screenshot: service images uploaded to docker hub]_
+> <img width="1300" height="736" alt="service images uploaded to docker hub " src="https://github.com/user-attachments/assets/c235d977-62d2-4fe1-96b6-1de8dd65feb2" />
 
 #### Docker Compose (Full Stack Local Environment)
 
@@ -472,7 +475,7 @@ Every infrastructure service has a **health check** that dependent services wait
 
 **Screenshot — Docker Compose file:**
 
-> 📸 _[Screenshot: Docker compose file]_
+> <img width="1300" height="736" alt="Docker compose file" src="https://github.com/user-attachments/assets/f237f812-f785-4498-8b23-9e6038b3d77c" />
 
 ---
 
