@@ -91,6 +91,7 @@ services:
       discovery-server:
         condition: service_healthy
     environment:
+      SERVER_PORT: 8082
       SPRING_DATA_MONGODB_URI: mongodb://appuser:apppass@mongodb:27017/product_db?authSource=product_db
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
 
@@ -103,6 +104,7 @@ services:
       discovery-server:
         condition: service_healthy
     environment:
+      SERVER_PORT: 8083
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/inventory_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: appuser
       SPRING_DATASOURCE_PASSWORD: apppass
@@ -135,7 +137,37 @@ services:
       kafka:
         condition: service_healthy
     environment:
+      SERVER_PORT: 8084
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    restart: unless-stopped
+    depends_on:
+      - discovery-server
+      - product-service
+      - inventory-service
+      - order-service
+      - notification-service
+      - api-gateway
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./infrastructure/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+
+  grafana:
+    image: grafana/grafana:12.1.1
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
 
   api-gateway:
     image: isuru071/api-gateway:latest
@@ -159,3 +191,5 @@ services:
 volumes:
   mysql_data:
   mongodb_data:
+  prometheus_data:
+  grafana_data:
